@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Coordinate System Converter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="js/math.js"></script>
+    <script src="js/calculator.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Coordinate System Conversion</h1>
+        <div class="mb-3">
+            In order to create the transformation matrix, type the vectors in the textarea in the required format!
+        </div>
+        <div class="mb-3">
+            The source code is available at the link: <a
+                href="https://github.com/bbalage/CoordinateSystemConverter">https://github.com/bbalage/CoordinateSystemConverter</a>.
+        </div>
+        <div class="mb-3">
+            <label for="textarea" class="form-label">Input as text</label>
+            <textarea id="textarea" name="Input text" class="bg-light border"
+                style="min-height: 400px; width: 100%"></textarea>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" onclick="calculateFromTextBoxPoints()">Calculate from text box!</button>
+        </div>
+        <div class="mb-3">
+            <label for="readData" class="form-label">Feldolgozás eredménye</label>
+            <div id="readData" class="bg-light border" style="min-height: 50px"></div>
+        </div>
+        <div class="mb-3">
+            Example valid input formats are available in the following files:
+        </div>
+        <div class="mb-3">
+            <ul>
+                <li><a href="https://bbalage.github.io/CoordinateSystemConverter/exampleFiles/example1.txt">2 dimenziós
+                        konverzió</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
