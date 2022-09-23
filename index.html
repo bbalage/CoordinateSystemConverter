@@ -15,6 +15,10 @@
         <h1>Coordinate System Conversion</h1>
         <div class="mb-3">
             In order to create the transformation matrix, type the vectors in the textarea in the required format!
+            The required format is csv-like, where the first line is a single number, which tells the program the
+            number of dimensions. Then, you need to type <i>dimension + 1</i> number of vectors in x1;x2;x3;x4 (or more
+            x-es) format for the source vectors, then for the destination vectors. Examples are available
+            <a href="https://github.com/bbalage/CoordinateSystemConverter/tree/master/exampleFiles">here</a>.
         </div>
         <div class="mb-3">
             The source code is available at the link: <a
@@ -23,21 +27,41 @@
         <div class="mb-3">
             <label for="textarea" class="form-label">Input as text</label>
             <textarea id="textarea" name="Input text" class="bg-light border"
-                style="min-height: 400px; width: 100%"></textarea>
+                style="min-height: 300px; width: 100%"></textarea>
         </div>
         <div class="mb-3">
             <button class="btn btn-primary" onclick="calculateFromTextBoxPoints()">Calculate from text box!</button>
         </div>
         <div class="mb-3">
-            <label for="readData" class="form-label">Feldolgozás eredménye</label>
-            <div id="readData" class="bg-light border" style="min-height: 50px"></div>
+            <label for="readArea" class="form-label">Result of processing</label>
+            <div id="readArea" class="bg-light border" style="min-height: 50px"></div>
         </div>
+
+        <div class="mb-3">
+            If you want to use the previously calculated matrix, type a vector in proper format -- x1;x2;x3 --, then
+            press the button.
+        </div>
+        <div class="mb-3">
+            <label for="vectorInput" class="form-label"><b>Input as text</b></label><br />
+            <textarea id="vectorInput" name="Input text" class="bg-light border"></textarea>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" onclick="transformInputVector()">Transform input vector</button>
+        </div>
+        <div class="mb-3">
+            <label for="vectorOutput" class="form-label">Result of processing</label>
+            <div id="vectorOutput" class="bg-light border" style="min-height: 50px"></div>
+        </div>
+
         <div class="mb-3">
             Example valid input formats are available in the following files:
         </div>
         <div class="mb-3">
             <ul>
                 <li><a href="https://bbalage.github.io/CoordinateSystemConverter/exampleFiles/example1.txt">2 dimenziós
+                        konverzió</a>
+                </li>
+                <li><a href="https://bbalage.github.io/CoordinateSystemConverter/exampleFiles/example1.txt">3 dimenziós
                         konverzió</a>
                 </li>
             </ul>

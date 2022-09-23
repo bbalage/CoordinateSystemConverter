@@ -1,3 +1,4 @@
+let transformationMatrix = math.identity(3);
 
 function calculateFromTextBoxPoints() {
     const text = document.getElementById("textarea").value;
@@ -5,6 +6,7 @@ function calculateFromTextBoxPoints() {
     const transformation = calculateTransformation(vectors[0], vectors[1]);
     const readArea = document.getElementById("readArea");
     readArea.innerText = transformation;
+    transformationMatrix = transformation;
 }
 
 function parseInputString(text) {
@@ -30,10 +32,11 @@ function parseVectorString(line, dimensions) {
     if (vectorStrs.length !== dimensions) {
         throw new Error("Parse error. Dimension missmatch!");
     }
-    let vector = new Array(dimensions);
+    let vector = new Array(dimensions + 1);
     for (let i = 0; i < dimensions; ++i) {
         vector[i] = parseFloat(vectorStrs[i]);
     }
+    vector[dimensions] = 1.0;
     return vector;
 }
 
@@ -42,11 +45,26 @@ function calculateTransformation(sourceVectors, destVectors) {
     // let arrayOfOnes = new Array(dimensions);
     // for (let element of arrayOfOnes)
     //     element = 1;
-    let sourceMatrix = math.zeros(dimensions, dimensions);
-    for (let row = 0; row < dimensions; ++row)
-        for (let col = 0; col < dimensions; ++col)
-            sourceMatrix.set([row, col], sourceVectors[row][col] !== undefined ? sourceVectors[row][col] : 1);
+    let sourceMatrix = math.matrix(sourceVectors);
     const destMatrix = math.matrix(destVectors);
     const invSourceMatrix = math.inv(sourceMatrix);
     return math.multiply(destMatrix, invSourceMatrix);
+}
+
+function transformInputVector() {
+    const text = document.getElementById("vectorInput").value;
+    const vector = parseVectorStringArbitraryDimensions(text);
+    const vectorMatrix = math.matrix(vector);
+    //const columnVector = math.transpose(vectorMatrix);
+    const transformedVector = math.multiply(vectorMatrix, transformationMatrix);
+    document.getElementById("vectorOutput").innerText = transformedVector;
+}
+
+function parseVectorStringArbitraryDimensions(line) {
+    const vectorStrs = line.split(";");
+    let vector = new Array(vectorStrs.length);
+    for (let i = 0; i < vector.length; ++i) {
+        vector[i] = parseFloat(vectorStrs[i]);
+    }
+    return vector;
 }
