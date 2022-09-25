@@ -41,22 +41,20 @@ function parseVectorString(line, dimensions) {
 }
 
 function calculateTransformation(sourceVectors, destVectors) {
-    const dimensions = sourceVectors.length;
-    // let arrayOfOnes = new Array(dimensions);
-    // for (let element of arrayOfOnes)
-    //     element = 1;
-    let sourceMatrix = math.matrix(sourceVectors);
+    const sourceMatrix = math.matrix(sourceVectors);
     const destMatrix = math.matrix(destVectors);
-    const invSourceMatrix = math.inv(sourceMatrix);
-    return math.multiply(destMatrix, invSourceMatrix);
+    const sourceMatrixT = math.transpose(sourceMatrix);
+    const invSourceMatrix = math.inv(sourceMatrixT);
+    const destMatrixT = math.transpose(destMatrix);
+    return math.multiply(destMatrixT, invSourceMatrix);
 }
 
 function transformInputVector() {
     const text = document.getElementById("vectorInput").value;
     const vector = parseVectorStringArbitraryDimensions(text);
-    const vectorMatrix = math.matrix(vector);
+    const vectorMatrix = math.transpose(math.matrix(vector));
     //const columnVector = math.transpose(vectorMatrix);
-    const transformedVector = math.multiply(vectorMatrix, transformationMatrix);
+    const transformedVector = math.multiply(transformationMatrix, vectorMatrix);
     document.getElementById("vectorOutput").innerText = transformedVector;
 }
 
